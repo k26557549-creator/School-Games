@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drift Hunters Unblocked</title>
+    <style>
+        /* Eliminates borders and forces full browser window coverage */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        
+        /* Ensures the 3D Unity game fills the screen cleanly */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Floating back button for mobile or desktop overlay navigation */
+        .back-button {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 112, 243, 0.9);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay back button navigation -->
+    <a href="index.html" class="back-button">⬅ Home</a>
+
+    <!-- Embedded Drift Hunters Engine -->
+    <iframe src="https://drifthuntersonline.gitlab.io/" allowfullscreen="true" scrolling="no"></iframe>
+
+</body>
+</html>
