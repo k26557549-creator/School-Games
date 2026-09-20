@@ -95,3 +95,572 @@
 
 </body>
 </html>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0f;
+  color: white;
+}
+
+/* Header */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 18px 6%;
+
+  background: #111118;
+  border-bottom: 1px solid #252530;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+#search {
+  margin-left: auto;
+
+  width: min(360px, 55vw);
+
+  padding: 12px 15px;
+
+  border: 1px solid #333341;
+  border-radius: 10px;
+
+  background: #1a1a22;
+  color: white;
+
+  outline: none;
+}
+
+#search:focus {
+  border-color: #777;
+}
+
+/* Main */
+
+main {
+  width: min(1200px, 92%);
+  margin: 30px auto;
+}
+
+/* Hero */
+
+.hero {
+  padding: 25px;
+  margin-bottom: 25px;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #191923,
+    #101016
+  );
+}
+
+.hero h2 {
+  margin: 0 0 8px;
+}
+
+.hero p {
+  margin: 0;
+  color: #aaa;
+}
+
+/* Movie Grid */
+
+.movie-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(180px, 1fr));
+
+  gap: 20px;
+}
+
+/* Movie Card */
+
+.movie-card {
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: #15151d;
+  border: 1px solid #272732;
+
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  border-color: #666;
+}
+
+/* Poster */
+
+.poster {
+  width: 100%;
+
+  aspect-ratio: 2 / 3;
+
+  object-fit: cover;
+
+  display: block;
+
+  background: #222;
+}
+
+/* Movie Information */
+
+.movie-info {
+  padding: 13px;
+}
+
+.movie-info h3 {
+  margin: 0 0 6px;
+
+  font-size: 17px;
+}
+
+.movie-info p {
+  margin: 0 0 12px;
+
+  color: #999;
+
+  font-size: 13px;
+}
+
+/* Watch Button */
+
+.watch {
+  width: 100%;
+
+  padding: 10px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: white;
+  color: black;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.watch:hover {
+  background: #ddd;
+}
+
+/* Video Modal */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+/* Video Box */
+
+.player-box {
+  position: relative;
+
+  width: min(1000px, 100%);
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background: #111118;
+}
+
+.player-box video {
+  display: block;
+
+  width: 100%;
+
+  max-height: 75vh;
+
+  background: black;
+
+  border-radius: 10px;
+}
+
+.player-box h2 {
+  margin-top: 0;
+}
+
+.player-box p {
+  color: #aaa;
+}
+
+/* Close Button */
+
+.close {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  z-index: 2;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  width: 34px;
+  height: 34px;
+
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  header {
+    flex-wrap: wrap;
+  }
+
+  #search {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+  .movie-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 12px;
+  }
+
+}
+/*
+  MOVIE LIST
+
+  Put your legally owned or authorized MP4 files
+  inside the "movies" folder.
+
+  Example:
+
+  movies/
+      mymovie.mp4
+      anothermovie.mp4
+
+  Then set:
+
+  video: "movies/mymovie.mp4"
+*/
+
+const movies = [
+
+  {
+    title: "My Movie",
+
+    genre: "Action",
+
+    description:
+      "Replace this with information about your movie.",
+
+    poster:
+      "https://via.placeholder.com/400x600/18181f/ffffff?text=My+Movie",
+
+    video:
+      "movies/my-movie.mp4"
+  },
+
+
+  {
+    title: "Another Movie",
+
+    genre: "Comedy",
+
+    description:
+      "Add another movie here.",
+
+    poster:
+      "https://via.placeholder.com/400x600/18181f/ffffff?text=Another+Movie",
+
+    video:
+      "movies/another-movie.mp4"
+  }
+
+];
+
+
+/* =========================
+   GET WEBSITE ELEMENTS
+========================= */
+
+const grid =
+  document.getElementById("movieGrid");
+
+const search =
+  document.getElementById("search");
+
+const modal =
+  document.getElementById("playerModal");
+
+const player =
+  document.getElementById("videoPlayer");
+
+const playerTitle =
+  document.getElementById("playerTitle");
+
+const playerDescription =
+  document.getElementById("playerDescription");
+
+const closePlayer =
+  document.getElementById("closePlayer");
+
+
+/* =========================
+   DISPLAY MOVIES
+========================= */
+
+function renderMovies(filter = "") {
+
+  const query =
+    filter.toLowerCase().trim();
+
+
+  const filteredMovies =
+    movies.filter(movie =>
+
+      movie.title
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      movie.genre
+        .toLowerCase()
+        .includes(query)
+
+    );
+
+
+  if (filteredMovies.length === 0) {
+
+    grid.innerHTML = `
+      <p>
+        No movies found.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    filteredMovies.map(movie => `
+
+      <article class="movie-card">
+
+        <img
+          class="poster"
+          src="${movie.poster}"
+          alt="${movie.title} poster"
+        >
+
+        <div class="movie-info">
+
+          <h3>
+            ${movie.title}
+          </h3>
+
+          <p>
+            ${movie.genre}
+          </p>
+
+          <button
+            class="watch"
+            data-index="${movies.indexOf(movie)}"
+          >
+            ▶ Watch
+          </button>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+
+  /* Add click events */
+
+  document
+    .querySelectorAll(".watch")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const index =
+            Number(button.dataset.index);
+
+          openMovie(index);
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =========================
+   OPEN MOVIE
+========================= */
+
+function openMovie(index) {
+
+  const movie =
+    movies[index];
+
+
+  playerTitle.textContent =
+    movie.title;
+
+
+  playerDescription.textContent =
+    movie.description;
+
+
+  player.src =
+    movie.video;
+
+
+  modal.hidden =
+    false;
+
+
+  /*
+    Some browsers block
+    automatic playback.
+  */
+
+  player.play().catch(() => {});
+
+}
+
+
+/* =========================
+   CLOSE MOVIE
+========================= */
+
+function closeMoviePlayer() {
+
+  player.pause();
+
+  player.removeAttribute("src");
+
+  player.load();
+
+  modal.hidden =
+    true;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+search.addEventListener(
+  "input",
+  event => {
+
+    renderMovies(
+      event.target.value
+    );
+
+  }
+);
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+closePlayer.addEventListener(
+  "click",
+  closeMoviePlayer
+);
+
+
+/* =========================
+   CLICK OUTSIDE PLAYER
+========================= */
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if (event.target === modal) {
+
+      closeMoviePlayer();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape" &&
+      !modal.hidden
+    ) {
+
+      closeMoviePlayer();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   START WEBSITE
+========================= */
+
+renderMovies();
