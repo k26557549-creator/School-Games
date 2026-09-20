@@ -1,66 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Station</title>
-    <style>
-        body { font-family: sans-serif; background-color: #0b0c10; color: #fff; margin: 0; padding: 20px; text-align: center; }
-        h1 { color: #4e4feb; font-size: 28px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Layout container for theater mode */
-        .theater-wrapper { max-width: 900px; margin: 0 auto; background: #1f2833; padding: 15px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
-        .video-screen { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 8px; overflow: hidden; }
-        .video-screen iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        
-        #current-title { font-size: 18px; margin-top: 15px; font-weight: bold; color: #66fcf1; }
-
-        /* Scrollable selection rack below the screen */
-        .catalog-headline { text-align: left; max-width: 900px; margin: 30px auto 10px auto; font-size: 20px; color: #c5c6c7; border-left: 4px solid #4e4feb; padding-left: 10px; }
-        .media-rack { display: flex; gap: 15px; overflow-x: auto; max-width: 900px; margin: 0 auto; padding: 10px 5px; scroll-behavior: smooth; }
-        
-        /* Individual selection thumb cards */
-        .media-card { background: #1f2833; border: 1px solid #45f3ff33; border-radius: 6px; padding: 12px; min-width: 140px; cursor: pointer; text-align: center; font-size: 14px; font-weight: bold; transition: all 0.2s; }
-        .media-card:hover { border-color: #66fcf1; background: #2a3545; transform: translateY(-2px); }
-        
-        .back-home { display: inline-block; margin-top: 30px; background: #000; color: #66fcf1; border: 1px solid #66fcf1; padding: 10px 20px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 14px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Hub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <h1>Media Hub</h1>
+  <header>
+    <h1>🎬 Movie Hub</h1>
 
-    <!-- MAIN VIEWING SCREEN -->
-    <div class="theater-wrapper">
-        <div class="video-screen">
-            <!-- Loads a default starter trailer. Changing a selection edits this frame's src -->
-            <iframe id="main-player" src="https://youtube.com" allowfullscreen></iframe>
-        </div>
-        <div id="current-title">Now Playing: Select a Title Below</div>
+    <input
+      id="search"
+      type="search"
+      placeholder="Search movies..."
+      autocomplete="off"
+    >
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h2>Movies</h2>
+      <p>Choose a movie below to start watching.</p>
+    </section>
+
+    <div id="movieGrid" class="movie-grid"></div>
+
+  </main>
+
+  <!-- Video Player -->
+  <div id="playerModal" class="modal" hidden>
+
+    <div class="player-box">
+
+      <button id="closePlayer" class="close">✕</button>
+
+      <h2 id="playerTitle"></h2>
+
+      <video
+        id="videoPlayer"
+        controls
+        playsinline
+      ></video>
+
+      <p id="playerDescription"></p>
+
     </div>
 
-    <div class="catalog-headline">Available Library</div>
-    
-    <!-- SELECTION CATALOG RACK -->
-    <div class="media-rack">
-        <!-- To add a different video clip, change the /embed/ code in the loadMedia function -->
-        <div class="media-card" onclick="loadMedia('https://youtube.com', 'Open Source Project Intro')">📁 Project Alpha</div>
-        <div class="media-card" onclick="loadMedia('https://youtube.com', 'Retro Music Clip')">🎵 Retro Playlist</div>
-        <div class="media-card" onclick="loadMedia('https://youtube.com', 'Sci-Fi Short Animation')">🚀 Cosmos Sci-Fi</div>
-        <div class="media-card" onclick="loadMedia('https://youtube.com', 'Nature Relax Station')">🌲 Horizon Ambient</div>
-    </div>
+  </div>
 
-    <br>
-    <a href="index.html" class="back-home">⬅ Return to Main Page</a>
-
-    <!-- ENGINE CODE HANDLER -->
-    <script>
-        function loadMedia(videoUrl, titleText) {
-            // Smoothly swaps out the active URL inside the iframe player
-            document.getElementById('main-player').src = videoUrl + "?rel=0&autoplay=1";
-            document.getElementById('current-title').textContent = "Now Playing: " + titleText;
-        }
-    </script>
-
-</body>
-</html>
+  <script src="script.js"></script>
