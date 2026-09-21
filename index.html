@@ -140,3 +140,58 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Arcade Hub</title>
+    <style>
+        body { background: #121212; color: #fff; font-family: sans-serif; margin: 0; padding: 20px; }
+        h1 { color: #ff4757; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { background: #1e1e1e; border-radius: 8px; padding: 20px; text-align: center; border: 1px solid #333; transition: 0.2s; }
+        .card:hover { border-color: #ff4757; transform: translateY(-3px); }
+        .cloud-card { border: 1px solid #00d2d3; } /* Special style for CloudMoon */
+        .cloud-card:hover { border-color: #00d2d3; }
+        .btn { display: inline-block; background: #ff4757; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-top: 15px; font-weight: bold; }
+        .btn-cloud { background: #00d2d3; color: #121212; }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 My Arcade Hub</h1>
+    <p>Play retro games, watch videos, or stream AAA mobile games through the cloud.</p>
+
+    <div class="grid">
+        <!-- NEW: CloudMoon Card -->
+        <div class="card cloud-card">
+            <h3>☁️ CloudMoon Streaming</h3>
+            <p>Play Roblox, Genshin Impact, and Fortnite instantly with zero lag.</p>
+            <a href="cloud-moon.html" class="btn btn-cloud">Launch Cloud</a>
+        </div>
+
+        <!-- Retro Bowl Card -->
+        <div class="card">
+            <h3>Retro Bowl</h3>
+            <p>Manage your team and score touchdowns in glorious 8-bit.</p>
+            <a href="retro-bowl.html" class="btn">Play Now</a>
+        </div>
+
+        <!-- Drift Hunters Card -->
+        <div class="card">
+            <h3>Drift Hunters</h3>
+            <p>Customize your car and drift through challenging tracks.</p>
+            <a href="drift-hunters.html" class="btn">Play Now</a>
+        </div>
+
+        <!-- YouTube Card -->
+        <div class="card">
+            <h3>Video Walkthroughs</h3>
+            <p>Watch high scores, tips, and hidden secrets.</p>
+            <a href="youtube.html" class="btn">Watch Videos</a>
+        </div>
+    </div>
+
+</body>
+</html>
