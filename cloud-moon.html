@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudMoon Stream - Arcade Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background: #121212; font-family: sans-serif; overflow: hidden; }
+        .nav-bar { width: 100%; height: 50px; background: #1e1e1e; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #333; }
+        .back-btn { color: #fff; text-decoration: none; font-weight: bold; background: #333; padding: 6px 12px; border-radius: 4px; }
+        .back-btn:hover { background: #ff4757; }
+        .fallback-btn { color: #121212; text-decoration: none; font-weight: bold; background: #00d2d3; padding: 6px 12px; border-radius: 4px; }
+        .game-container { width: 100%; height: calc(100% - 50px); position: relative; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Top control bar so players can get back to your main site easily -->
+    <div class="nav-bar">
+        <a href="index.html" class="back-btn">⬅ Back to Arcade</a>
+        <span style="color: #00d2d3; font-weight: bold;">CloudMoon Mobile Cloud Gaming</span>
+        <a href="https://web.cloudmoonapp.com/" target="_blank" class="fallback-btn">Open Fullscreen ↗</a>
+    </div>
+
+    <!-- The Game Stream Canvas -->
+    <div class="game-container">
+        <iframe 
+            src="https://web.cloudmoonapp.com/" 
+            allow="autoplay; gamepad; fullscreen" 
+            sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin">
+        </iframe>
+    </div>
+
+</body>
+</html>
