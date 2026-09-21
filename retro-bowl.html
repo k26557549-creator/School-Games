@@ -3,53 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Bowl Unblocked</title>
+    <title>Retro Bowl - My Arcade Hub</title>
     <style>
-        /* Forces the game window to fill the entire browser screen */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            overflow: hidden;
-            font-family: sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background: #121212; font-family: sans-serif; color: #fff; overflow-x: hidden; }
         
-        /* Absolute positioning handles fullscreen sizing cleanly */
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Small mobile floating back button to return to your main page */
-        .back-button {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            background: rgba(0, 112, 243, 0.85);
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+        /* Top Navigation Bar */
+        .nav-bar { width: 100%; height: 50px; background: #1e1e1e; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #333; }
+        .back-btn { color: #fff; text-decoration: none; font-weight: bold; background: #333; padding: 6px 12px; border-radius: 4px; transition: 0.2s; }
+        .back-btn:hover { background: #ff4757; }
+        .fs-btn { color: #fff; background: #ff4757; border: none; font-weight: bold; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .fs-btn:hover { background: #e03d4f; }
+        
+        /* Game Screen Container */
+        .game-wrapper { width: 100%; max-width: 960px; margin: 30px auto; padding: 0 15px; }
+        .game-container { position: relative; width: 100%; padding-top: 56.25%; /* 16:9 Aspect Ratio */ background: #000; border-radius: 8px; overflow: hidden; border: 2px solid #333; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        /* Controls Guide Section */
+        .controls-guide { max-width: 960px; margin: 20px auto; padding: 20px; background: #1e1e1e; border-radius: 8px; border: 1px solid #333; }
+        .controls-guide h2 { color: #ff4757; margin-bottom: 15px; font-size: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .control-item { background: #292929; padding: 12px; border-radius: 6px; border-left: 4px solid #ff4757; }
+        .key { background: #444; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-weight: bold; color: #ff4757; }
     </style>
 </head>
 <body>
 
-    <!-- Floating navigation helper -->
-    <a href="index.html" class="back-button">⬅ Home</a>
+    <!-- Navigation Control Bar -->
+    <div class="nav-bar">
+        <a href="index.html" class="back-btn">⬅ Back to Arcade</a>
+        <span style="font-weight: bold; letter-spacing: 1px;">RETRO BOWL</span>
+        <button class="fs-btn" onclick="goFullscreen()">Go Fullscreen ⛶</button>
+    </div>
 
-    <!-- Embedded Retro Bowl Engine -->
-    <iframe src="https://3kh0.github.io/retro-bowl/" allowfullscreen="true"></iframe>
+    <!-- Interactive Game Window -->
+    <div class="game-wrapper">
+        <div class="game-container" id="gameFrameContainer">
+            <!-- Utilizing your specific custom Vercel-hosted game files -->
+            <iframe 
+                id="retroBowlFrame"
+                src="https://schoolwork-puce.vercel.app/games/retro-bowl/index.html" 
+                allow="autoplay; fullscreen; keyboard" 
+                sandbox="allow-scripts allow-same-origin allow-downloads">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Play Guide & Instruction Cheat Sheet -->
+    <div class="controls-guide">
+        <h2>🎮 How to Play Retro Bowl</h2>
+        <div class="grid">
+            <div class="control-item">
+                <strong>Pass / Throw:</strong> Click and drag <span class="key">Mouse</span> backwards to aim, release to throw.
+            </div>
+            <div class="control-item">
+                <strong>Running / Juke:</strong> Use <span class="key">W</span> / <span class="key">S</span> or <span class="key">Up</span> / <span class="key">Down</span> arrows to dodge tackles.
+            </div>
+            <div class="control-item">
+                <strong>Dive:</strong> Press <span class="key">A</span> or <span class="key">Left Arrow</span> while running to gain extra yards.
+            </div>
+            <div class="control-item">
+                <strong>Stiff Arm:</strong> Press <span class="key">D</span> or <span class="key">Right Arrow</span> to push off defenders.
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript script handles standard HTML5 full element sizing requests safely -->
+    <script>
+        function goFullscreen() {
+            var embedContainer = document.getElementById("gameFrameContainer");
+            if (embedContainer.requestFullscreen) {
+                embedContainer.requestFullscreen();
+            } else if (embedContainer.mozRequestFullScreen) { /* Firefox */
+                embedContainer.mozRequestFullScreen();
+            } else if (embedContainer.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                embedContainer.webkitRequestFullscreen();
+            } else if (embedContainer.msRequestFullscreen) { /* IE/Edge */
+                embedContainer.msRequestFullscreen();
+            }
+        }
+    </script>
 
 </body>
 </html>
