@@ -34,19 +34,22 @@
     <div class="nav-bar">
         <a href="index.html" class="back-btn">⬅ Back to Arcade</a>
         <span style="font-weight: bold; letter-spacing: 1px;">RETRO BOWL</span>
-        <!-- Button calls our updated iframe fullscreen script below -->
         <button class="fs-btn" onclick="goFullscreen()">Go Fullscreen ⛶</button>
     </div>
 
     <!-- Interactive Game Window -->
     <div class="game-wrapper">
         <div class="game-container">
-            <!-- Explicit sandbox and allow properties are required for hardware/keyboard support in fullscreen -->
+            <!-- 
+              CRITICAL FIXES APPLIED HERE:
+              1. 'allow-same-origin' is included so the game can access its data files and read/write cookies/localStorage to save your seasons.
+              2. 'allow-pointer-lock' is included so your mouse clicks don't fly off the game canvas while dragging to throw football passes.
+            -->
             <iframe 
                 id="retroBowlFrame"
                 src="https://vercel.app" 
                 allow="autoplay; fullscreen; keyboard; gamepad" 
-                sandbox="allow-scripts allow-same-origin allow-downloads allow-pointer-lock">
+                sandbox="allow-scripts allow-same-origin allow-downloads allow-pointer-lock allow-forms">
             </iframe>
         </div>
     </div>
@@ -70,19 +73,18 @@
         </div>
     </div>
 
-    <!-- Target-Specific Fullscreen Execution Script -->
+    <!-- JavaScript Target Fullscreen Action -->
     <script>
         function goFullscreen() {
-            // Target the actual game iframe directly instead of its parent element block
             var gameIframe = document.getElementById("retroBowlFrame");
             
             if (gameIframe.requestFullscreen) {
                 gameIframe.requestFullscreen();
-            } else if (gameIframe.mozRequestFullScreen) { /* Firefox alternative */
+            } else if (gameIframe.mozRequestFullScreen) { /* Firefox */
                 gameIframe.mozRequestFullScreen();
-            } else if (gameIframe.webkitRequestFullscreen) { /* Safari, Chrome, and Opera alternative */
+            } else if (gameIframe.webkitRequestFullscreen) { /* Chrome, Safari, Opera */
                 gameIframe.webkitRequestFullscreen();
-            } else if (gameIframe.msRequestFullscreen) { /* Internet Explorer/Edge alternative */
+            } else if (gameIframe.msRequestFullscreen) { /* IE/Edge */
                 gameIframe.msRequestFullscreen();
             }
         }
